@@ -16,31 +16,32 @@
     <div id="viz">
         <script>
             var vlSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "data": {"url": "https://vega.github.io/editor/data/movies.json"},
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": {"url": "https://vega.github.io/editor/data/movies.json"},
 
-  "hconcat": [
-    {
-      "params": [{"name": "myfirstparam", "select": "interval"}],
-      "mark":"bar",
-      "encoding": {
-        "x":{"field":"IMDB Rating", "type": "quantitative", "bin":true},
-        "y":{"aggregate":"mean", "field": "US Gross"}
-      }
-    },
-    {
-      "mark":"point",
-      "encoding": {
-        "x":{"field":"US Gross", "type": "quantitative"},
-        "y":{"field":"Worldwide Gross", "type": "quantitative"},
-        "color":{
-          "value": "gray",
-          "condition": {"param": "myfirstparam"}
-        },
-      }
-    }
-  ]
-}
+                "hconcat": [
+                    {
+                    "params": [{"name": "myfirstparam", "select": "interval"}],
+                    "mark":"bar",
+                    "encoding": {
+                        "x":{"field":"IMDB Rating", "type": "quantitative", "bin":true},
+                        "y":{"aggregate":"mean", "field": "US Gross"}
+                    }
+                    },
+                    {
+                    "mark":"point",
+                    "encoding": {
+                        "x":{"field":"US Gross", "type": "quantitative"},
+                        "y":{"field":"Worldwide Gross", "type": "quantitative"},
+                        "color":{
+                        "value": "gray",
+                        "condition": {"param": "myfirstparam"}
+                        },
+                    }
+                    }
+                ]
+            };
+            vegaEmbed{"#viz", vlSpec}
         </script>
     </div>
 </body>
