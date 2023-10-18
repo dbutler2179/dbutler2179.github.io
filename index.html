@@ -17,26 +17,37 @@
         <script>
             var vlSpec = {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": {"url": "https://vega.github.io/editor/data/movies.json"},
-
+                "data": {
+                    "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+                },
                 "hconcat": [
                     {
-                    "params": [{"name": "myfirstparam", "select": "interval"}],
-                    "mark":"bar",
-                    "encoding": {
-                        "x":{"field":"IMDB Rating", "type": "quantitative", "bin":true},
-                        "y":{"aggregate":"mean", "field": "US Gross"}
-                    }
+                    "layer": [
+                        {
+                        "mark": {"type": "bar", "cornerRadius": 5},
+                        "encoding": {
+                            "x": {"field": "Agency Name", "type": "nominal"},
+                            "y": {"aggregate": "sum", "field": "Square Footage"},
+                            "color": {"value": "grey"}
+                        }
+                        },
+                        {
+                        "transform": [{"filter": {"param": "myfirstparam"}}],
+                        "mark": {"type": "bar", "cornerRadius": 10},
+                        "encoding": {
+                            "x": {"field": "Agency Name", "type": "nominal"},
+                            "y": {"aggregate": "sum", "field": "Square Footage"}
+                        }
+                        }
+                    ]
                     },
                     {
-                    "mark":"point",
+                    "mark": {"type": "point", "shape": "diamond"},
+                    "params": [{"name": "myfirstparam", "select": "interval"}],
                     "encoding": {
-                        "x":{"field":"US Gross", "type": "quantitative"},
-                        "y":{"field":"Worldwide Gross", "type": "quantitative"},
-                        "color":{
-                        "value": "gray",
-                        "condition": {"param": "myfirstparam"}
-                        },
+                        "x": {"field": "Usage Description", "type": "nominal"},
+                        "y": {"field": "Square Footage", "type": "quantitative"},
+                        "color": {"value": "grey", "condition": {"param": "myfirstparam"}}
                     }
                     }
                 ]
